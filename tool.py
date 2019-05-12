@@ -128,8 +128,10 @@ def handle_photo():
             list_info[-1]['arr']['link'].append(filename)
             list_info[-1]['arr']['text'].append(info)
             list_info[-1]['arr']['type'].append('image')
+    #本地没问题，服务器上就乱序了，无奈加了一行排序的逻辑
+    list_info.sort(key = lambda x:x["date"])
     list_info.reverse()  # 翻转
-	#print list_info
+    #print (list_info)
     final_dict = {"list": list_info}
     with open("/usr/local/blog/myblog/themes/next/source/lib/album/data.json","w") as fp:
         json.dump(final_dict, fp)
